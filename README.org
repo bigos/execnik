@@ -1,9 +1,19 @@
-# execnik
-### _Your Name <your.name@example.com>_
+* execnik
+** author info: Jacek Podkanski
 
 This is a project to do ... something.
 
-## License
+** License
 
 Specify license here
 
+** interesting links
+
+https://github.com/plops/cl-cffi-gtk-from-repl
+
+** Useage
+#+BEGIN_EXAMPLE
+(push #p "c:/Users/Jacek/Documents/Programming/Lisp/execnik/" asdf:*central-registry*)
+(ql:quickload :execnik)
+(in-package :execnik)
+#+END_EXAMPLE

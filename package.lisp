@@ -1,4 +1,4 @@
 ;;;; package.lisp
 
 (defpackage #:execnik
-  (:use #:cl))
+  (:use #:gtk #:gdk #:gobject #:glib #:pango #:cairo #:cffi #:iterate #:cl))
