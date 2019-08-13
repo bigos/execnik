@@ -5,6 +5,9 @@
   :author "Your Name <your.name@example.com>"
   :license  "Specify license here"
   :version "0.0.1"
+
+  :entry-point "execnik::run"
+
   :serial t
   :depends-on (#:cl-cffi-gtk)
   :components ((:file "package")
