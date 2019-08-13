@@ -16,6 +16,8 @@ https://github.com/plops/cl-cffi-gtk-from-repl
 
 *** REPL
 
+Add directory with the project as in the following example
+
 #+BEGIN_SRC lisp
   (push #p "c:/Users/Jacek/Documents/Programming/Lisp/execnik/" asdf:*central-registry*)
   (ql:quickload :execnik)

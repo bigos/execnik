@@ -1,16 +1,30 @@
 ;;; sbcl --load THIS-FILE
 
+(defparameter project-path
+  (uiop/os:getcwd))
+
+(defparameter exec-name
+  (if (equalp :OS-UNIX (uiop/os:detect-os))
+      "execnik"
+      "execnik.exe"))
+
 (push
- #p "c:/Users/Jacek/Documents/Programming/Lisp/execnik/"
+ project-path
  asdf:*central-registry*)
 
 (ql:quickload :execnik)
 (in-package :execnik)
 
-;; ;; (sb-ext:disable-debugger)
+(if (equalp :OS-UNIX (uiop/os:detect-os))
+    (sb-ext:save-lisp-and-die
+     (merge-pathnames common-lisp-user::project-path
+                      common-lisp-user::exec-name)
+     :toplevel #'run
+     :executable T)
 
-(sb-ext:save-lisp-and-die
- #p "c:/Users/Jacek/Documents/Programming/Lisp/execnik/execnik.exe"
- :toplevel #'run
- :executable T
- :application-type :gui)
+    (sb-ext:save-lisp-and-die
+     (merge-pathnames common-lisp-user::project-path
+                      common-lisp-user::exec-name)
+     :toplevel #'run
+     :executable T
+     :application-type :gui)) ; windows may need this one
