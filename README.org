@@ -14,8 +14,19 @@ https://github.com/plops/cl-cffi-gtk-from-repl
 
 ** Usage
 
+*** REPL
+
 #+BEGIN_SRC lisp
   (push #p "c:/Users/Jacek/Documents/Programming/Lisp/execnik/" asdf:*central-registry*)
   (ql:quickload :execnik)
   (in-package :execnik)
 #+END_SRC
+
+*** compilation and running
+
+#+BEGIN_EXAMPLE
+sbcl --load ./compilation.lisp
+./execnik.exe
+#+END_EXAMPLE
+
+It also works in File Explorer
