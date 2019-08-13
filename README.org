@@ -1,4 +1,5 @@
 * execnik
+
 ** author info: Jacek Podkanski
 
 This is a project to do ... something.
@@ -11,9 +12,10 @@ Specify license here
 
 https://github.com/plops/cl-cffi-gtk-from-repl
 
-** Useage
-#+BEGIN_EXAMPLE
-(push #p "c:/Users/Jacek/Documents/Programming/Lisp/execnik/" asdf:*central-registry*)
-(ql:quickload :execnik)
-(in-package :execnik)
-#+END_EXAMPLE
+** Usage
+
+#+BEGIN_SRC lisp
+  (push #p "c:/Users/Jacek/Documents/Programming/Lisp/execnik/" asdf:*central-registry*)
+  (ql:quickload :execnik)
+  (in-package :execnik)
+#+END_SRC
