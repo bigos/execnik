@@ -42,3 +42,7 @@ start Msys2 terminal, cd to the executable and start it from the terminal.
 
 Ideal solution would be creation of distributable package similar to:
 https://github.com/msys2/msys2/wiki/Distributing
+
+**** suggested solution
+
+https://styrene.readthedocs.io/en/latest/quickstart.html
