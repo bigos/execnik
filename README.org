@@ -2,11 +2,12 @@
 
 ** author info: Jacek Podkanski
 
-This is a project to do ... something.
+This is a project to demonstrate ability of creation cross-platform Gtk
+applications in SBCL.
 
 ** License
 
-Specify license here
+Public Domain
 
 ** interesting links
 
@@ -31,4 +32,4 @@ sbcl --load ./compilation.lisp
 ./execnik.exe
 #+END_EXAMPLE
 
-It also works in File Explorer
+It also works in File Explorer on Windows and file managers on Linux.
