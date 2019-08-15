@@ -55,10 +55,18 @@ https://github.com/msys2/msys2/wiki/Distributing
 
 I decided to try Styrene
 
-https://styrene.readthedocs.io/en/latest/quickstart.html
+https://github.com/achadwick/styrene
 
 ***** cfg file
 
 Next, I have created ~execnik.cfg~ file, which will be used to compile a Windows
 installer. As a template I used ~gtk3-examples.cfg~ copied from styrene
 repository.
+
+***** building
+
+I started Msys2 terminal entered styrene folder and ran:
+
+#+BEGIN_EXAMPLE
+./styrene.sh -o ./tmp/ /c/Users/Jacek/Documents/Programming/Lisp/execnik/execnik.cfg
+#+END_EXAMPLE
