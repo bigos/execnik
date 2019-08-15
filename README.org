@@ -32,7 +32,11 @@ sbcl --load ./compilation.lisp
 ./execnik.exe
 #+END_EXAMPLE
 
+**** Running on Linux
+
 On Linux it works in terminal and file managers.
+
+**** Runnning on Windows
 
 It also works in File Explorer on Windows if you have Msys2 and gtk libraries
 installed and ~C:\msys64\mingw64\bin~ path added to your environment variables.
@@ -40,9 +44,12 @@ installed and ~C:\msys64\mingw64\bin~ path added to your environment variables.
 If you do not have the ~mingw64\bin~ path added to your environment you need to
 start Msys2 terminal, cd to the executable and start it from the terminal.
 
+*** Distribution of binary on Windows
+
+**** suggested solution
+
 Ideal solution would be creation of distributable package similar to:
 https://github.com/msys2/msys2/wiki/Distributing
 
-**** suggested solution
 
 https://styrene.readthedocs.io/en/latest/quickstart.html
