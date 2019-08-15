@@ -70,3 +70,5 @@ I started Msys2 terminal entered styrene folder and ran:
 #+BEGIN_EXAMPLE
 ./styrene.sh -o ./tmp/ /c/Users/Jacek/Documents/Programming/Lisp/execnik/execnik.cfg
 #+END_EXAMPLE
+
+That has lead to realization that I need to create a pacman package first.
