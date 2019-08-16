@@ -78,7 +78,7 @@ https://blogs.gnome.org/nacho/2014/08/01/how-to-build-your-gtk-application-on-wi
 
 Another experiment
 
-creating distribution folder, copying bin and shared folders from mingw64 and
+Creating distribution folder, copying bin and shared folders from mingw64 and
 copying my executable to bin creates bloated folder that can be possibly
 distributed.
 
