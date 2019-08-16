@@ -73,8 +73,19 @@ I started Msys2 terminal entered styrene folder and ran:
 
 That has lead to realization that I need to create a pacman package first.
 
+possible clue
+https://blogs.gnome.org/nacho/2014/08/01/how-to-build-your-gtk-application-on-windows/
 
-***** strange find
+Another experiment
+
+creating distribution folder, copying bin and shared folders from mingw64 and
+copying my executable to bin creates bloated folder that can be possibly
+distributed.
+
+So now we need to figure out how to copy only the files we need and create a
+decent installer.
+
+***** bundling libraries myself
 
 Downloading listdlls from
 https://docs.microsoft.com/en-us/sysinternals/downloads/listdlls
