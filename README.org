@@ -72,3 +72,18 @@ I started Msys2 terminal entered styrene folder and ran:
 #+END_EXAMPLE
 
 That has lead to realization that I need to create a pacman package first.
+
+
+***** strange find
+
+Downloading listdlls from
+https://docs.microsoft.com/en-us/sysinternals/downloads/listdlls
+and copying executable ~Listdlls64.exe~
+to c:/Users/Jacek/AppData/Roaming/local/bin/Listdlls64.exe
+has revealed sources of used libraries
+
+now I can run
+#+BEGIN_EXAMPLE
+Listdlls64.exe execnik.exe | grep msys
+#+END_EXAMPLE
+to reveal paths to loaded libraries
