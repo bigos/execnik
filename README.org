@@ -73,10 +73,24 @@ I started Msys2 terminal entered styrene folder and ran:
 
 That has lead to realization that I need to create a pacman package first.
 
-possible clue
-https://blogs.gnome.org/nacho/2014/08/01/how-to-build-your-gtk-application-on-windows/
+******  possible clue
+ https://blogs.gnome.org/nacho/2014/08/01/how-to-build-your-gtk-application-on-windows/
 
-Another experiment
+****** cont
+
+install build packages for msys2
+https://github.com/msys2/MSYS2-packages
+
+creating packages
+https://github.com/msys2/msys2/wiki/Creating-Packages
+
+Native Windows software (from this project's perspective) is software that
+doesn't depend on msys-2.0.dll, and links dynamically to the highly compatible
+~msvcrt.dll.~
+
+
+
+***** Another experiment
 
 Creating distribution folder, copying bin and shared folders from mingw64 and
 copying my executable to bin creates bloated folder that can be possibly
