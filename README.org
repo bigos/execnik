@@ -105,7 +105,17 @@ decent installer.
 https://github.com/gtk-rs/gtk/issues/422
 
 ****** use sbcl to
+---------------------------------------------------
 
+Use my cmdlauncher.cmd a cmd with modified paths to include Mingw64 paths
+cd to project
+start execnik.exe to make possible finding of used libraries
+start another cmdlauncher and cd to the project
+sbcl --load distribution-on-windows.lisp
+that creates a new folder with the executable, bundled libraries and other
+needed files
+
+---------------------------------------------------
 create or empty distribution folder
 
 ******* in the bin folder
