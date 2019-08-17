@@ -31,3 +31,11 @@
           for found-index = (search "mingw64" e)
           when found-index
             collect (subseq e (- found-index preceding-path-length)))))
+
+
+(external-program:run "mkdir"  '("distro") :output *standard-output*)
+(external-program:run "mkdir"  '("distro/bin") :output *standard-output*)
+(external-program:run "cp"  '("execnik.exe" "distro/bin/") :output *standard-output*)
+
+(loop for dll in  mingw-list do
+  (external-program:run "cp" (list dll "distro/bin")))
