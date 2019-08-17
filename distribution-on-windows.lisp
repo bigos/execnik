@@ -6,61 +6,77 @@
                 :cl-strings))
 
 (defpackage #:distribution-on-windows
-  (:use #:cl))
+  (:use #:external-program #:cl))
 
 (in-package #:distribution-on-windows)
 
-(defparameter mingw-path #p "c:/msys64/mingw64/")
+;;; assuming we started Emacs from cmdlauncher.cmd in the projects path
 (defparameter project-path (uiop/os:getcwd))
-
-(format t "project path is ~A~%" project-path)
-
+(defparameter mingw-path #p "c:/msys64/mingw64/")
+(defparameter *distribution-folder* "execnik_for_windows")
 (defparameter *output*
   (with-output-to-string (out)
-    ;; run command with parameters as list of strings
+    ;; when we have execnik.exe running we can query it for used libraries
     (external-program:run "Listdlls64.exe" '("execnik.exe")
                           :output out)))
-(if  (search "No matching processes were found" *output*)
-     (format t "~%~%Please start execnik.exe and do not close until we find used libraries")
-     (format t "~%~%Going to read the libraries used"))
 
-(defparameter mingw-list
-  (let ((string-list (uiop:split-string *output*
-                                        :separator '(#\Return #\Newline)))
-        (preceding-path-length 10))
-    (loop for e in string-list
-          for found-index = (search "mingw64" e)
-          when found-index
-            collect (subseq e (- found-index preceding-path-length)))))
+(defun quit-on-regular-terminal ()
+  (unless (sb-ext:posix-getenv "INSIDE_EMACS")
+    (format t "~&Quitting...~%")
+    (sb-ext:exit)))
 
-
-(external-program:run "mkdir"  '("distro"))
-(external-program:run "mkdir"  '("distro/bin"))
-(external-program:run "cp"  '("execnik.exe" "distro/bin/"))
-
-(loop for dll in  mingw-list do
-  (external-program:run "cp" (list dll "distro/bin")))
-
-(external-program:run "mkdir"  '("distro/share"))
-(external-program:run "mkdir"  '("distro/share/glib-2.0"))
-(external-program:run "mkdir"  '("distro/share/glib-2.0/schemas"))
-
-(external-program:run "mkdir"  '("distro/share/icons"))
-(external-program:run "mkdir"  '("distro/share/icons/Adwaita"))
-(external-program:run "mkdir"  '("distro/share/icons/hicolor"))
+(defun distribution-path (path)
+  (if path
+      (format nil "~A/~A" *distribution-folder* path)
+      (format nil "~A" *distribution-folder*)))
 
 (defun source-wild-path (project wild path )
   (let ((cs (if wild
                 "~A~A/*"
                 "~A~A/")))
-      (format nil cs project path)))
+    (format nil cs project path)))
 
-(external-program:run "cp" (list (source-wild-path mingw-path T "share/glib-2.0/schemas")
-                                 (source-wild-path project-path nil "distro/share/glib-2.0/schemas")))
-(external-program:run "cp" (list (source-wild-path mingw-path T "share/icons/Adwaita")
-                                 (source-wild-path project-path nil "distro/icons/Adwaita")))
-(external-program:run "cp" (list (source-wild-path mingw-path T "share/icons/hicolor")
-                                 (source-wild-path project-path nil "distro/icons/hicolor")))
 
-(format t "~&Done!~%")
-(sb-ext:exit)
+(if  (search "No matching processes were found" *output*)
+     (progn
+       (format t "~%~%Please start execnik.exe and do not close until we find used libraries")
+       (quit-on-regular-terminal))
+     (progn
+       (format t "~%~%Going to read the libraries used...")
+       (let* ((string-list (uiop:split-string *output*
+                                              :separator '(#\Return #\Newline)))
+              (preceding-path-length 10)
+              (mingw-list (loop for e in string-list
+                                for found-index = (search "mingw64" e)
+                                when found-index
+                                  collect (subseq e (- found-index preceding-path-length)))))
+
+         (run "rm"  (list "-r" (distribution-path nil)))
+
+         (run "mkdir"  (list (distribution-path nil)))
+         (run "mkdir"  (list (distribution-path "bin")))
+         (run "cp"  (list "execnik.exe" (distribution-path "bin/")))
+
+         (loop for dll in  mingw-list do
+           (run "cp" (list dll (distribution-path "bin"))))
+
+         (run "mkdir"  (list (distribution-path "share")))
+         (run "mkdir"  (list (distribution-path "share/glib-2.0")))
+         (run "mkdir"  (list (distribution-path "share/glib-2.0/schemas")))
+
+         (run "mkdir"  (list (distribution-path "share/icons")))
+         (run "mkdir"  (list (distribution-path "share/icons/Adwaita")))
+         (run "mkdir"  (list (distribution-path "share/icons/hicolor")))
+
+         (when nil                      ; we do not copy icons
+           (format T "~&copying icons...~%")
+           (run "cp" (list "-r" (source-wild-path mingw-path T "share/glib-2.0/schemas")
+                             (source-wild-path project-path nil (distribution-path "share/glib-2.0/schemas/"))))
+           (run "cp" (list "-r" (source-wild-path mingw-path T "share/icons/Adwaita")
+                             (source-wild-path project-path nil (distribution-path "share/icons/Adwaita/"))))
+           (run "cp" (list "-r" (source-wild-path mingw-path T "share/icons/hicolor")
+                             (source-wild-path project-path nil (distribution-path "share/icons/hicolor/")))))
+
+         (format t "~&Done!~%")
+
+         (quit-on-regular-terminal))))
