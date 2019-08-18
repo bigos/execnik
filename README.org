@@ -46,6 +46,9 @@ start Msys2 terminal, cd to the executable and start it from the terminal.
 
 *** Distribution of binary on Windows
 
+You can also use a version that does not need Msys2 if you create a bundle with
+all the libraries needed.
+
 ---------------------------------------------------
 
 Use my cmdlauncher.cmd a cmd with modified paths to include Mingw64 paths
