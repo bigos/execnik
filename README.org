@@ -49,8 +49,7 @@ start Msys2 terminal, cd to the executable and start it from the terminal.
 You can also use a version that does not need Msys2 if you create a bundle with
 all the libraries needed.
 
----------------------------------------------------
-
+#+BEGIN_EXAMPLE
 Use my cmdlauncher.cmd a cmd with modified paths to include Mingw64 paths
 cd to the project
 start execnik.exe to make possible finding of used libraries
@@ -58,5 +57,4 @@ start another cmdlauncher and cd to the project
 sbcl --load distribution-on-windows.lisp
 that creates a new folder with the executable, bundled libraries and other
 needed files
-
----------------------------------------------------
+#+END_EXAMPLE
